@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- ============ EDIT: Page title ============ -->
+<title>Join Free Learning Community</title>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+.ring {
+  position: relative;
+  width: 100px;
+  height: 100px;
+  margin: 0 auto;
+}
+
+.ring-inner {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  overflow: hidden;      /* clips the image into the circle */
+  border: 3px solid #ffffff; /* optional ring border, adjust color */
+}
+
+.profile {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;     /* crops image to fill circle without distortion */
+  object-position: center;
+  display: block;
+}
+
+.spark {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  background: var(--accent);   /* theme accent color */
+  border-radius: 50%;
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-size: 14px;
+  border: 2px solid #fff;
+}
+:root{
+  --primary:#2E7CF6;
+  --primary-deep:#1550B0;
+  --accent:#8B6CFF;
+  --ink:#F2F4FA;
+  --ink-soft:#A9B2C7;
+  --bg:#060812;
+  --card:rgba(15,19,34,.74);
+  --border:rgba(46,124,246,.30);
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{
+  min-height:100vh;min-height:100dvh;display:flex;justify-content:center;align-items:center;
+  padding:24px 16px;color:var(--ink);font-family:'Inter',system-ui,sans-serif;
+  background:var(--bg);overflow-x:hidden;position:relative;
+}
+.aurora{position:fixed;inset:0;z-index:-2;background:var(--bg);}
+.aurora span{position:absolute;border-radius:50%;filter:blur(90px);opacity:.32;animation:drift 16s ease-in-out infinite alternate;}
+.aurora .a1{width:320px;height:320px;background:var(--primary);top:-100px;left:-80px;}
+.aurora .a2{width:280px;height:280px;background:var(--accent);bottom:-110px;right:-90px;animation-delay:-6s;}
+@keyframes drift{0%{transform:translate(0,0) scale(1);}100%{transform:translate(25px,-30px) scale(1.1);}}
+
+.wrapper{width:100%;max-width:440px;position:relative;z-index:1;}
+.card{
+  background:var(--card);border:1px solid var(--border);border-radius:24px;
+  padding:clamp(26px,6vw,40px) clamp(20px,5vw,32px);
+  backdrop-filter:blur(22px);-webkit-backdrop-filter:blur(22px);
+  box-shadow:0 40px 80px rgba(0,0,0,.55), inset 0 1px 0 rgba(255,255,255,.06);
+  text-align:center;position:relative;overflow:hidden;
+}
+.card::before{
+  content:"";position:absolute;top:-2px;left:-2px;right:-2px;height:3px;
+  background:linear-gradient(90deg,transparent,var(--primary),var(--accent),transparent);opacity:.85;
+}
+
+.verify{color:var(--primary);font-size:11.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;
+  display:flex;align-items:center;justify-content:center;gap:6px;margin-bottom:14px;}
+.verify i{color:var(--accent);}
+
+.subline{margin-top:10px;font-size:12px;color:var(--ink-soft);letter-spacing:.03em;}
+
+/* ============ EDIT: Headline ============ */
+h3{
+  font-size:clamp(20px,5.4vw,25px);font-weight:800;font-family:'Space Grotesk',sans-serif;
+  background:linear-gradient(135deg,#fff,var(--primary) 55%,var(--accent));
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+  margin:16px 0;line-height:1.4;
+}
+
+.description{margin-bottom:22px;line-height:1.7;font-size:15px;color:var(--ink-soft);}
+
+/* ---- CTA button + loading/qualifying state ---- */
+.btn{
+  display:flex;align-items:center;justify-content:center;gap:10px;width:100%;padding:17px;
+  border-radius:16px;text-decoration:none;color:#fff;font-size:15px;font-weight:800;
+  font-family:'Space Grotesk',sans-serif;
+  background:linear-gradient(135deg,var(--primary),var(--primary-deep) 55%,var(--accent));
+  box-shadow:0 14px 34px rgba(46,124,246,.35), inset 0 1px 0 rgba(255,255,255,.25);
+  position:relative;overflow:hidden;border:1px solid rgba(255,255,255,.18);
+  transition:transform .25s ease, box-shadow .25s ease, opacity .25s ease;
+  cursor:pointer;
+}
+.btn:hover{transform:translateY(-3px);box-shadow:0 18px 40px rgba(46,124,246,.5);}
+.btn.is-loading{opacity:.55;pointer-events:none;cursor:default;}
+.btn.is-loading .btn-label{opacity:0;}
+.btn-spinner{
+  display:none;position:absolute;width:20px;height:20px;border-radius:50%;
+  border:2.5px solid rgba(255,255,255,.3);border-top-color:#fff;animation:spin .7s linear infinite;
+}
+.btn.is-loading .btn-spinner{display:block;}
+@keyframes spin{to{transform:rotate(360deg);}}
+
+.prep-note{margin-top:10px;font-size:12px;color:var(--ink-soft);min-height:16px;}
+
+.fallback-link{
+  display:none;margin-top:12px;font-size:12.5px;color:var(--accent);text-decoration:underline;
+}
+.fallback-link.show{display:inline-block;}
+
+.benefits{margin-top:24px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08);
+  border-radius:16px;padding:6px 18px;text-align:left;}
+.benefits div{padding:12px 0;color:var(--ink-soft);font-size:13.5px;display:flex;align-items:center;gap:13px;
+  border-bottom:1px solid rgba(255,255,255,.05);}
+.benefits div:last-child{border-bottom:none;}
+.benefits i{font-size:15px;width:18px;text-align:center;color:var(--primary);}
+
+.disclaimer-wrap{margin-top:22px;text-align:center;}
+.credit{padding-top:12px;border-top:1px solid rgba(255,255,255,.08);}
+.credit p{font-weight:700;margin-bottom:8px;font-size:10.5px;color:var(--ink-soft);letter-spacing:.03em;}
+.credit a{display:inline-block;background:#229ED9;color:#fff;padding:7px 16px;border-radius:8px;
+  text-decoration:none;font-weight:600;font-size:12px;font-family:'Space Grotesk',sans-serif;}
+.disclaimer{margin-top:18px;font-size:10.5px;line-height:1.8;color:#7d8496;padding:0 6px;}
+</style>
+
+<!-- ============================================================
+     META PIXEL — EDIT: apna Pixel ID daalo neeche
+     ============================================================ -->
+<script>
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window, document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '1737551380726590'); /* <-- EDIT */
+fbq('track', 'PageView');
+</script>
+<noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=1737551380726590&ev=PageView&noscript=1"/></noscript>
+</head>
+<body>
+
+<div class="aurora"><span class="a1"></span><span class="a2"></span></div>
+
+<div class="wrapper">
+  <div class="card">
+    <div class="verify"><i class="fas fa-check-circle"></i>ಪ್ರಮಾಣಿತ ಪ್ರೇಕ್ಟಿಸ್ ಸಮುದಾಯ</div>
+
+
+    <div class="hero">
+    <div class="ring">
+      <div class="ring-inner">
+        <img src="CA.jpg" alt="Kannada Trader" class="profile">
+      </div>
+      <div class="spark"><i class="fas fa-arrow-trend-up"></i></div>
+    </div>
+        <div class="subline">Strategic · Systematic · Trusted Education</div>
+  </div>
+
+    <!-- ============ EDIT: Headline & description ============ -->
+    <h3>ಚಿರು ಆನಂದ್ (ಕನ್ನಡ ವ್ಯಾಪಾರಿ) ಜೊತೆ ಕಲಿಯಿರಿ </h3>
+    <p class="description">ನಿಷ್ಣಾತರು ದ್ವಾರಾ ಪ್ರಮಾಣಿತ ಏವು ವ್ಯೂಹಾತ್ಮಕ ಮತ್ತು ವ್ಯವಸ್ಥಿತ ಪದ್ಧತಿ ಶಿಕ್ಷಿಸೋ—ಜೇನಲ್ಲಿ ಅಂದಾಯ ಕೇ ಅನುಮಾನನೇ ಯಾವುದೂ ಸ್ಥಾನ ನಲ್ಲ.. </p>
+
+    <button class="btn" id="telegramBtn" disabled>
+      <span class="btn-label"><i class="fab fa-telegram" style="font-size:18px;"></i> JOIN FREE LEARNING COMMUNITY <i class="fas fa-arrow-right"></i></span>
+      <span class="btn-spinner"></span>
+    </button>
+    <div class="prep-note" id="prepNote">ತಮಾರು ಍ಕ್ಸೇಸ್ ತಯಾರು ಮಾಡಲಾಗುತ್ತಿದೆ…</div>
+    <a href="#" class="fallback-link" id="fallbackLink">Not Redirect? Tap here !</a>
+
+    <div class="benefits">
+      <div><i class="fas fa-chart-line"></i> <span>ದೈನಂದಿನ ಲೈವ್ ಸೆಷನ್‌ಗಳು ಮತ್ತು ನವೀಕರಣಗಳು</span></div>
+      <div><i class="fas fa-book-open"></i> <span>ತಜ್ಞರ ನೇತೃತ್ವದ ತರಬೇತಿ ಮಾಡ್ಯೂಲ್‌ಗಳು</span></div>
+      <div><i class="fas fa-bullseye"></i> <span>ವೈಯಕ್ತಿಕಗೊಳಿಸಿದ ಕಲಿಕೆಯ ಮಾರ್ಗಗಳು</span></div>
+      <div><i class="fas fa-users"></i> <span>24 X 7 ಸಮುದಾಯ ಬೆಂಬಲ ಮತ್ತು ನೆಟ್‌ವರ್ಕಿಂಗ್</span></div>
+    </div>
+  </div>
+
+  <div class="disclaimer-wrap">
+    <div class="credit">
+      <p>Advertised by : *SRS Marketing Agency</p>
+      <a href="https://t.me/srsagency" target="_blank">📩 Visit @ SRS Marketing</a>
+    </div>
+    <!-- ============ EDIT: Disclaimer text (niche-specific) ============ -->
+    <div class="disclaimer"><strong>ನಿರಾಕರಣ:</strong> ಈ ವೇದಿಕೆಯು ಕೇವಲ ಶಿಕ್ಷಣ ಮತ್ತು ಸಮಾಚಾರ ಉದ್ದೇಶಗಳಿಗಾಗಿ ಅನ್ನಡಲಾಗಿದೆ. ಮೇಮು ಯಾವುದೂ ಪೇಟವಡಿ, ಟ್ರೇಡಿಂಗ ಲೆಡಾ ಆರ್ಥಿಕ ಸಲಹೆಗಳನ್ನು ನಡೆಸಲಾಗದ. ದಯವಿಟ್ಟು, ಈಗಲಹದನಕಲಪಡಸಹ.</div>
+  </div>
+</div>
+
+<script>
+/* ================================================================
+   CONFIG — har naye client/campaign ke liye sirf ye section edit karo
+   ================================================================ */
+const CONFIG = {
+  TELEGRAM_LINK: "https://t.me/+skJpTAjueoVmMDE1",   // EDIT
+  MIN_DWELL_MS: 2500,          // kam se kam kitni der page pe rukna zaroori hai (ms)
+  REQUIRE_INTERACTION: true,   // scroll/mouse/touch signal zaroori hai ya nahi
+  PREP_DELAY_MS: 1500,         // button turant active nahi hoga, itni der "preparing" dikhega
+  BOT_CHECK_ENABLED: true,     // basic headless/bot user-agent filtering
+};
+
+/* ----------------------------------------------------------------
+   1) ENGAGEMENT SIGNALS
+   Ye track karta hai ki user ne page ke saath genuinely interact
+   kiya ya nahi — bots aur impulsive junk clicks isi se filter hote hain.
+   ---------------------------------------------------------------- */
+let pageLoadTime = Date.now();
+let hasScrolled = false;
+let hasMouseMoved = false;
+
+window.addEventListener('scroll', () => { hasScrolled = true; }, { once: true });
+document.addEventListener('mousemove', () => { hasMouseMoved = true; }, { once: true });
+document.addEventListener('touchstart', () => { hasMouseMoved = true; }, { once: true });
+
+function isLikelyRealUser() {
+  const timeOnPage = Date.now() - pageLoadTime;
+  if (timeOnPage < CONFIG.MIN_DWELL_MS) return false;
+  if (CONFIG.REQUIRE_INTERACTION && !hasScrolled && !hasMouseMoved) return false;
+  return true;
+}
+
+/* ----------------------------------------------------------------
+   2) BOT FILTERING
+   Headless browsers aur known crawler user-agents ke liye events
+   fire hi nahi honge.
+   ---------------------------------------------------------------- */
+function isProbablyBot() {
+  if (!CONFIG.BOT_CHECK_ENABLED) return false;
+  if (navigator.webdriver) return true;
+  if (/bot|crawl|spider|slurp|headless/i.test(navigator.userAgent)) return true;
+  return false;
+}
+
+/* ----------------------------------------------------------------
+   3) "PREPARING ACCESS" GATE
+   Button load hote hi active nahi hota — ye chhota sa intentional
+   friction hai jo bots/impulsive clickers ko naturally filter karta
+   hai, kyunki genuine users thoda wait karte hain.
+   ---------------------------------------------------------------- */
+const btn = document.getElementById('telegramBtn');
+const prepNote = document.getElementById('prepNote');
+const fallbackLink = document.getElementById('fallbackLink');
+fallbackLink.href = CONFIG.TELEGRAM_LINK;
+
+btn.classList.add('is-loading');
+
+setTimeout(() => {
+  if (isProbablyBot()) return; // bot ko kabhi active button nahi milega
+  btn.disabled = false;
+  btn.classList.remove('is-loading');
+  prepNote.textContent = '';
+}, CONFIG.PREP_DELAY_MS);
+
+/* ----------------------------------------------------------------
+   4) TRACK + REDIRECT
+   - Genuine engagement pe: 'Lead' event fire hota hai
+   - Low-quality/too-fast click pe: 'LowQualityClick' custom event
+     (isse Lead data clean rehta hai, Meta ka algorithm behtar
+     audience optimize karta hai)
+   - Redirect turant (koi setTimeout delay nahi) taaki Instagram/
+     Facebook in-app browser navigation block na kare
+   - Same eventID browser Pixel aur (agar aage CAPI add karo) server
+     side dono mein use karo — Meta automatically duplicate event
+     ko dedupe kar dega
+   ---------------------------------------------------------------- */
+let fired = false;
+
+function trackAndRedirect(event) {
+  if (event) event.preventDefault();
+  if (fired) {
+    window.location.href = CONFIG.TELEGRAM_LINK;
+    return;
+  }
+  fired = true;
+
+  const eventId = 'lead_' + Date.now() + '_' + Math.random().toString(36).slice(2, 8);
+
+  if (isProbablyBot()) {
+    // Bot detect hua — koi bhi conversion event fire nahi karenge
+    window.location.href = CONFIG.TELEGRAM_LINK;
+    return;
+  }
+
+  if (typeof fbq !== 'undefined') {
+    if (isLikelyRealUser()) {
+      fbq('track', 'Lead', {
+        content_name: 'Telegram Community',
+        value: '0.00',
+        currency: 'INR',
+      }, { eventID: eventId });
+
+      /* ------------------------------------------------------------
+         OPTIONAL — CAPI (Conversions API) HOOK
+         Agar backend hai (jaise humara Meta Ads tool), yahan se
+         server ko bhi yehi event bhej sakte ho, SAME eventID ke
+         saath — taaki Meta dono ko ek hi conversion maane:
+
+         fetch('https://your-backend.com/api/capi/lead', {
+           method: 'POST',
+           headers: { 'Content-Type': 'application/json' },
+           body: JSON.stringify({
+             eventId: eventId,
+             eventTime: Math.floor(Date.now() / 1000),
+             fbclid: new URLSearchParams(location.search).get('fbclid'),
+           })
+         });
+         ------------------------------------------------------------ */
+    } else {
+      // Genuine dikh nahi raha (bahut jaldi click) — Lead data clean rakhne
+      // ke liye alag custom event mein daal do
+      fbq('trackCustom', 'LowQualityClick', { eventID: eventId });
+    }
+  }
+
+  window.location.href = CONFIG.TELEGRAM_LINK;
+
+  // Fallback: agar 1.2 sec baad bhi redirect nahi hua (kuch in-app
+  // browsers silently block kar dete hain), manual link dikha do
+  setTimeout(() => { fallbackLink.classList.add('show'); }, 1200);
+}
+
+btn.addEventListener('click', trackAndRedirect);
+</script>
+
+</body>
+</html>
