@@ -172,7 +172,7 @@ fbq('track', 'PageView');
     <div class="hero">
     <div class="ring">
       <div class="ring-inner">
-        <img src="CHR.jpg" alt="Kannada Trader" class="profile">
+        <img src="CA.jpg" alt="Kannada Trader" class="profile">
       </div>
       <div class="spark"><i class="fas fa-arrow-trend-up"></i></div>
     </div>
@@ -183,7 +183,7 @@ fbq('track', 'PageView');
     <h3>ಚಿರು ಆನಂದ್ (ಕನ್ನಡ ವ್ಯಾಪಾರಿ) ಜೊತೆ ಕಲಿಯಿರಿ </h3>
     <p class="description">ನಿಷ್ಣಾತರು ದ್ವಾರಾ ಪ್ರಮಾಣಿತ ಏವು ವ್ಯೂಹಾತ್ಮಕ ಮತ್ತು ವ್ಯವಸ್ಥಿತ ಪದ್ಧತಿ ಶಿಕ್ಷಿಸೋ—ಜೇನಲ್ಲಿ ಅಂದಾಯ ಕೇ ಅನುಮಾನನೇ ಯಾವುದೂ ಸ್ಥಾನ ನಲ್ಲ.. </p>
 
-    <button class="btn" id="telegramBtn" disabled>
+    <button class="btn" id="telegramBtn" onclick="trackAndRedirect(event)">
       <span class="btn-label"><i class="fab fa-telegram" style="font-size:18px;"></i> JOIN FREE LEARNING COMMUNITY <i class="fas fa-arrow-right"></i></span>
       <span class="btn-spinner"></span>
     </button>
@@ -209,139 +209,51 @@ fbq('track', 'PageView');
 </div>
 
 <script>
-/* ================================================================
-   CONFIG — har naye client/campaign ke liye sirf ye section edit karo
-   ================================================================ */
-const CONFIG = {
-  TELEGRAM_LINK: "https://t.me/+skJpTAjueoVmMDE1",   // EDIT
-  MIN_DWELL_MS: 2500,          // kam se kam kitni der page pe rukna zaroori hai (ms)
-  REQUIRE_INTERACTION: true,   // scroll/mouse/touch signal zaroori hai ya nahi
-  PREP_DELAY_MS: 1500,         // button turant active nahi hoga, itni der "preparing" dikhega
-  BOT_CHECK_ENABLED: true,     // basic headless/bot user-agent filtering
-};
-
-/* ----------------------------------------------------------------
-   1) ENGAGEMENT SIGNALS
-   Ye track karta hai ki user ne page ke saath genuinely interact
-   kiya ya nahi — bots aur impulsive junk clicks isi se filter hote hain.
-   ---------------------------------------------------------------- */
-let pageLoadTime = Date.now();
-let hasScrolled = false;
-let hasMouseMoved = false;
-
-window.addEventListener('scroll', () => { hasScrolled = true; }, { once: true });
-document.addEventListener('mousemove', () => { hasMouseMoved = true; }, { once: true });
-document.addEventListener('touchstart', () => { hasMouseMoved = true; }, { once: true });
-
-function isLikelyRealUser() {
-  const timeOnPage = Date.now() - pageLoadTime;
-  if (timeOnPage < CONFIG.MIN_DWELL_MS) return false;
-  if (CONFIG.REQUIRE_INTERACTION && !hasScrolled && !hasMouseMoved) return false;
-  return true;
-}
-
-/* ----------------------------------------------------------------
-   2) BOT FILTERING
-   Headless browsers aur known crawler user-agents ke liye events
-   fire hi nahi honge.
-   ---------------------------------------------------------------- */
-function isProbablyBot() {
-  if (!CONFIG.BOT_CHECK_ENABLED) return false;
-  if (navigator.webdriver) return true;
-  if (/bot|crawl|spider|slurp|headless/i.test(navigator.userAgent)) return true;
-  return false;
-}
-
-/* ----------------------------------------------------------------
-   3) "PREPARING ACCESS" GATE
-   Button load hote hi active nahi hota — ye chhota sa intentional
-   friction hai jo bots/impulsive clickers ko naturally filter karta
-   hai, kyunki genuine users thoda wait karte hain.
-   ---------------------------------------------------------------- */
-const btn = document.getElementById('telegramBtn');
-const prepNote = document.getElementById('prepNote');
-const fallbackLink = document.getElementById('fallbackLink');
-fallbackLink.href = CONFIG.TELEGRAM_LINK;
-
-btn.classList.add('is-loading');
-
-setTimeout(() => {
-  if (isProbablyBot()) return; // bot ko kabhi active button nahi milega
-  btn.disabled = false;
-  btn.classList.remove('is-loading');
-  prepNote.textContent = '';
-}, CONFIG.PREP_DELAY_MS);
-
-/* ----------------------------------------------------------------
-   4) TRACK + REDIRECT
-   - Genuine engagement pe: 'Lead' event fire hota hai
-   - Low-quality/too-fast click pe: 'LowQualityClick' custom event
-     (isse Lead data clean rehta hai, Meta ka algorithm behtar
-     audience optimize karta hai)
-   - Redirect turant (koi setTimeout delay nahi) taaki Instagram/
-     Facebook in-app browser navigation block na kare
-   - Same eventID browser Pixel aur (agar aage CAPI add karo) server
-     side dono mein use karo — Meta automatically duplicate event
-     ko dedupe kar dega
-   ---------------------------------------------------------------- */
-let fired = false;
+const TELEGRAM_URL = "https://t.me/+skJpTAjueoVmMDE1";
 
 function trackAndRedirect(event) {
   if (event) event.preventDefault();
-  if (fired) {
-    window.location.href = CONFIG.TELEGRAM_LINK;
-    return;
-  }
-  fired = true;
-
-  const eventId = 'lead_' + Date.now() + '_' + Math.random().toString(36).slice(2, 8);
-
-  if (isProbablyBot()) {
-    // Bot detect hua — koi bhi conversion event fire nahi karenge
-    window.location.href = CONFIG.TELEGRAM_LINK;
-    return;
-  }
 
   if (typeof fbq !== 'undefined') {
-    if (isLikelyRealUser()) {
-      fbq('track', 'Lead', {
-        content_name: 'Telegram Community',
-        value: '0.00',
-        currency: 'INR',
-      }, { eventID: eventId });
-
-      /* ------------------------------------------------------------
-         OPTIONAL — CAPI (Conversions API) HOOK
-         Agar backend hai (jaise humara Meta Ads tool), yahan se
-         server ko bhi yehi event bhej sakte ho, SAME eventID ke
-         saath — taaki Meta dono ko ek hi conversion maane:
-
-         fetch('https://your-backend.com/api/capi/lead', {
-           method: 'POST',
-           headers: { 'Content-Type': 'application/json' },
-           body: JSON.stringify({
-             eventId: eventId,
-             eventTime: Math.floor(Date.now() / 1000),
-             fbclid: new URLSearchParams(location.search).get('fbclid'),
-           })
-         });
-         ------------------------------------------------------------ */
-    } else {
-      // Genuine dikh nahi raha (bahut jaldi click) — Lead data clean rakhne
-      // ke liye alag custom event mein daal do
-      fbq('trackCustom', 'LowQualityClick', { eventID: eventId });
-    }
+    fbq('track', 'Lead', {
+      value: '0.00',
+      currency: 'INR',
+      predicted_ltv: '0.00',
+    });
+  } else {
+    console.log('Pixel not loaded, but redirecting...');
   }
 
-  window.location.href = CONFIG.TELEGRAM_LINK;
-
-  // Fallback: agar 1.2 sec baad bhi redirect nahi hua (kuch in-app
-  // browsers silently block kar dete hain), manual link dikha do
-  setTimeout(() => { fallbackLink.classList.add('show'); }, 1200);
+  setTimeout(function () {
+    window.location.href = TELEGRAM_URL;
+  }, 300);
 }
 
-btn.addEventListener('click', trackAndRedirect);
+let time = 10;
+const timerTextTpl = "Will be redirecting in {n} seconds....";
+const countTxt = document.getElementById('countTxt');
+
+function paintTimer() {
+  if (!countTxt) return;
+  countTxt.innerHTML = timerTextTpl.replace(
+    '{n}',
+    '<span style="color:#ffd700;font-weight:bold;">' + time + '</span>'
+  );
+}
+paintTimer();
+
+const countdown = setInterval(function () {
+  time--;
+  paintTimer();
+  if (time <= 0) {
+    clearInterval(countdown);
+    trackAndRedirect();
+  }
+}, 1000);
 </script>
+
+    
+</body>
 
 </body>
 </html>
