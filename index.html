@@ -2,7 +2,7 @@
 <html lang="kn">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <!-- ============ EDIT: Page title ============ -->
 <title>Join Free Learning Community</title>
 
@@ -22,14 +22,14 @@
   width: 100%;
   height: 100%;
   border-radius: 50%;
-  overflow: hidden;      /* clips the image into the circle */
-  border: 3px solid #ffffff; /* optional ring border, adjust color */
+  overflow: hidden;
+  border: 3px solid #ffffff;
 }
 
 .profile {
   width: 100%;
   height: 100%;
-  object-fit: cover;     /* crops image to fill circle without distortion */
+  object-fit: cover;
   object-position: center;
   display: block;
 }
@@ -38,7 +38,7 @@
   position: absolute;
   bottom: 0;
   right: 0;
-  background: var(--accent);   /* theme accent color */
+  background: var(--accent);
   border-radius: 50%;
   width: 28px;
   height: 28px;
@@ -59,10 +59,10 @@
   --card:rgba(15,19,34,.74);
   --border:rgba(46,124,246,.30);
 }
-*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+*{margin:0;padding:0;box-sizing:border-box;}
 body{
   min-height:100vh;min-height:100dvh;display:flex;justify-content:center;align-items:center;
-  padding:24px 16px 112px;color:var(--ink);font-family:'Inter',system-ui,sans-serif;
+  padding:24px 16px;color:var(--ink);font-family:'Inter',system-ui,sans-serif;
   background:var(--bg);overflow-x:hidden;position:relative;
 }
 .aurora{position:fixed;inset:0;z-index:-2;background:var(--bg);}
@@ -90,7 +90,6 @@ body{
 
 .subline{margin-top:10px;font-size:12px;color:var(--ink-soft);letter-spacing:.03em;}
 
-/* ============ EDIT: Headline ============ */
 h3{
   font-size:clamp(20px,5.4vw,25px);font-weight:800;font-family:'Space Grotesk',sans-serif;
   background:linear-gradient(135deg,#fff,var(--primary) 55%,var(--accent));
@@ -100,7 +99,6 @@ h3{
 
 .description{margin-bottom:22px;line-height:1.7;font-size:15px;color:var(--ink-soft);}
 
-/* ---- CTA button + loading/qualifying state ---- */
 .btn{
   display:flex;align-items:center;justify-content:center;gap:10px;width:100%;padding:17px;
   border-radius:16px;text-decoration:none;color:#fff;font-size:15px;font-weight:800;
@@ -135,34 +133,17 @@ h3{
 .benefits div:last-child{border-bottom:none;}
 .benefits i{font-size:15px;width:18px;text-align:center;color:var(--primary);}
 
+.timer{margin-top:16px;text-align:center;font-size:12.5px;color:var(--ink-soft);font-weight:600;}
+
 .disclaimer-wrap{margin-top:22px;text-align:center;}
 .credit{padding-top:12px;border-top:1px solid rgba(255,255,255,.08);}
 .credit p{font-weight:700;margin-bottom:8px;font-size:10.5px;color:var(--ink-soft);letter-spacing:.03em;}
 .credit a{display:inline-block;background:#229ED9;color:#fff;padding:7px 16px;border-radius:8px;
   text-decoration:none;font-weight:600;font-size:12px;font-family:'Space Grotesk',sans-serif;}
 .disclaimer{margin-top:18px;font-size:10.5px;line-height:1.8;color:#7d8496;padding:0 6px;}
-
-/* FIX: sticky CTA ki CSS pehle missing thi is file mein, add ki gayi */
-.sticky-cta{
-  position:fixed;bottom:0;left:0;width:100%;z-index:999;
-  padding:14px 16px calc(14px + env(safe-area-inset-bottom));
-  background:linear-gradient(180deg, transparent, rgba(6,8,18,.92) 35%);
-  display:flex;justify-content:center;
-}
-.sticky-cta a{
-  position:relative;width:100%;max-width:440px;overflow:hidden;
-  background:linear-gradient(135deg,var(--primary),var(--primary-deep) 55%,var(--accent));
-  padding:16px 20px;border-radius:16px;display:flex;align-items:center;justify-content:center;gap:10px;
-  text-decoration:none;color:#fff;font-weight:800;font-size:15px;font-family:'Space Grotesk',sans-serif;
-  box-shadow:0 14px 32px rgba(0,0,0,.5);animation:pulse 2.4s infinite;
-  border:1px solid rgba(255,255,255,.2);
-}
-@keyframes pulse{0%,100%{transform:scale(1);}50%{transform:scale(1.015);}}
 </style>
 
-<!-- ============================================================
-     META PIXEL
-     ============================================================ -->
+<!-- Meta Pixel Code -->
 <script>
 !function(f,b,e,v,n,t,s)
 {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
@@ -172,10 +153,13 @@ n.queue=[];t=b.createElement(e);t.async=!0;
 t.src=v;s=b.getElementsByTagName(e)[0];
 s.parentNode.insertBefore(t,s)}(window, document,'script',
 'https://connect.facebook.net/en_US/fbevents.js');
-fbq('init', '1737551380726590'); /* <-- EDIT */
+fbq('init', '1737551380726590');
 fbq('track', 'PageView');
 </script>
-<noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=1737551380726590&ev=PageView&noscript=1"/></noscript>
+<noscript><img height="1" width="1" style="display:none"
+src="https://www.facebook.com/tr?id=1737551380726590&ev=PageView&noscript=1"
+/></noscript>
+<!-- End Meta Pixel Code -->
 </head>
 <body>
 
@@ -184,7 +168,6 @@ fbq('track', 'PageView');
 <div class="wrapper">
   <div class="card">
     <div class="verify"><i class="fas fa-check-circle"></i>ಪ್ರಮಾಣಿತ ಪ್ರೇಕ್ಟಿಸ್ ಸಮುದಾಯ</div>
-
 
     <div class="hero">
     <div class="ring">
@@ -196,7 +179,6 @@ fbq('track', 'PageView');
         <div class="subline">Strategic · Systematic · Trusted Education</div>
   </div>
 
-    <!-- ============ EDIT: Headline & description ============ -->
     <h3>ಚಿರು ಆನಂದ್ (ಕನ್ನಡ ವ್ಯಾಪಾರಿ) ಜೊತೆ ಕಲಿಯಿರಿ </h3>
     <p class="description">ನಿಷ್ಣಾತರು ದ್ವಾರಾ ಪ್ರಮಾಣಿತ ಏವು ವ್ಯೂಹಾತ್ಮಕ ಮತ್ತು ವ್ಯವಸ್ಥಿತ ಪದ್ಧತಿ ಶಿಕ್ಷಿಸೋ—ಜೇನಲ್ಲಿ ಅಂದಾಯ ಕೇ ಅನುಮಾನನೇ ಯಾವುದೂ ಸ್ಥಾನ ನಲ್ಲ.. </p>
 
@@ -213,6 +195,8 @@ fbq('track', 'PageView');
       <div><i class="fas fa-bullseye"></i> <span>ವೈಯಕ್ತಿಕಗೊಳಿಸಿದ ಕಲಿಕೆಯ ಮಾರ್ಗಗಳು</span></div>
       <div><i class="fas fa-users"></i> <span>24 X 7 ಸಮುದಾಯ ಬೆಂಬಲ ಮತ್ತು ನೆಟ್‌ವರ್ಕಿಂಗ್</span></div>
     </div>
+
+    <div class="timer" id="countTxt"></div>
   </div>
 
   <div class="disclaimer-wrap">
@@ -220,190 +204,70 @@ fbq('track', 'PageView');
       <p>Advertised by : *SRS Marketing Agency</p>
       <a href="https://t.me/srsagency" target="_blank">📩 Visit @ SRS Marketing</a>
     </div>
-    <!-- ============ EDIT: Disclaimer text (niche-specific) ============ -->
     <div class="disclaimer"><strong>ನಿರಾಕರಣ:</strong> ಈ ವೇದಿಕೆಯು ಕೇವಲ ಶಿಕ್ಷಣ ಮತ್ತು ಸಮಾಚಾರ ಉದ್ದೇಶಗಳಿಗಾಗಿ ಅನ್ನಡಲಾಗಿದೆ. ಮೇಮು ಯಾವುದೂ ಪೇಟವಡಿ, ಟ್ರೇಡಿಂಗ ಲೆಡಾ ಆರ್ಥಿಕ ಸಲಹೆಗಳನ್ನು ನಡೆಸಲಾಗದ. ದಯವಿಟ್ಟು, ಈಗಲಹದನಕಲಪಡಸಹ.</div>
   </div>
 </div>
 
-<!-- FIX: sticky bottom CTA missing thi is file mein — script isko dhoondh
-     raha tha (getElementById('stickyTelegramBtn')) lekin element hi nahi tha,
-     isliye "Cannot read properties of null" crash ho raha tha -->
-<div class="sticky-cta">
-  <a href="https://t.me/+skJpTAjueoVmMDE1" id="stickyTelegramBtn" onclick="trackAndRedirect(event)">
-    <i class="fab fa-telegram" style="font-size:18px;"></i>
-    <span>JOIN FREE LEARNING COMMUNITY</span>
-  </a>
-</div>
-
 <script>
-(function () {
-  /* ================================================================
-     CONFIG — sirf ye values edit karo
-     ================================================================ */
-  const CONFIG = {
-    TELEGRAM_LINK: "https://t.me/+skJpTAjueoVmMDE1",   // <-- EDIT: https://t.me/+xxxx format
-    ENABLE_COUNTDOWN: true,
-    COUNTDOWN_SECONDS: 10,
-    MIN_DWELL_MS: 0,
-    REQUIRE_INTERACTION: true,
-    BOT_CHECK_ENABLED: true,
+const TELEGRAM_URL = "https://t.me/+skJpTAjueoVmMDE1";
 
-    // NAYA in v2: pixel beacon ko complete hone ka time (ms).
-    // 150-300 ke beech safe hai — user ko delay feel nahi hoga,
-    // lekin Meta Pixel ka network request cancel hone se bach jaata hai.
-    PIXEL_FLUSH_DELAY_MS: 200,
-  };
+// FIX: dedupe guard add kiya
+let fired = false;
 
-  /* ----------------------------------------------------------------
-     1) ENGAGEMENT SIGNALS — same as v1
-     ---------------------------------------------------------------- */
-  const pageLoadTime = Date.now();
-  let hasScrolled = false;
-  let hasMouseMoved = false;
-  window.addEventListener('scroll', () => { hasScrolled = true; }, { once: true });
-  document.addEventListener('mousemove', () => { hasMouseMoved = true; }, { once: true });
-  document.addEventListener('touchstart', () => { hasMouseMoved = true; }, { once: true });
+const fallbackLink = document.getElementById('fallbackLink');
+// FIX: fallback link ka href pehle kabhi set hi nahi hota tha
+fallbackLink.href = TELEGRAM_URL;
 
-  function isLikelyRealUser() {
-    const timeOnPage = Date.now() - pageLoadTime;
-    if (timeOnPage < CONFIG.MIN_DWELL_MS) return false;
-    if (CONFIG.REQUIRE_INTERACTION && !hasScrolled && !hasMouseMoved) return false;
-    return true;
+function trackAndRedirect(event) {
+  if (event) event.preventDefault();
+  if (countdown) clearInterval(countdown);
+
+  if (fired) {
+    window.location.href = TELEGRAM_URL;
+    return;
+  }
+  fired = true;
+
+  if (typeof fbq !== 'undefined') {
+    fbq('track', 'Lead', {
+      value: '0.00',
+      currency: 'INR',
+      predicted_ltv: '0.00',
+    }, { eventID: 'Lead_' + Date.now() });
+  } else {
+    console.log('Pixel not loaded, but redirecting...');
   }
 
-  function isProbablyBot() {
-    if (!CONFIG.BOT_CHECK_ENABLED) return false;
-    if (navigator.webdriver) return true;
-    if (/bot|crawl|spider|slurp|headless/i.test(navigator.userAgent)) return true;
-    return false;
+  setTimeout(function () {
+    window.location.href = TELEGRAM_URL;
+  }, 300);
+
+  // FIX: fallback ab turant visible hone lagta hai redirect attempt ke saath
+  setTimeout(function () { fallbackLink.classList.add('show'); }, 1200);
+}
+
+let time = 20;
+const timerTextTpl = "Will be redirecting in {n} seconds....";
+const countTxt = document.getElementById('countTxt');
+
+function paintTimer() {
+  if (!countTxt) return;
+  countTxt.innerHTML = timerTextTpl.replace(
+    '{n}',
+    '<span style="color:#8B6CFF;font-weight:bold;">' + time + '</span>'
+  );
+}
+paintTimer();
+
+// FIX: interval 500ms se 1000ms kiya
+const countdown = setInterval(function () {
+  time--;
+  paintTimer();
+  if (time <= 0) {
+    clearInterval(countdown);
+    trackAndRedirect();
   }
-
-  /* ----------------------------------------------------------------
-     2) TRACK + REDIRECT — v2: pixel ko fire hone ka time dete hain
-     redirect se pehle. Fallback link turant visible karte hain taaki
-     agar redirect block ho (in-app browser), user manually tap kar sake.
-     ---------------------------------------------------------------- */
-  let fired = false;
-  let redirected = false;
-
-  function doRedirect() {
-    if (redirected) return;
-    redirected = true;
-    window.location.href = CONFIG.TELEGRAM_LINK;
-  }
-
-  function showFallback() {
-    const fallback = document.getElementById('fallbackLink');
-    if (fallback) {
-      fallback.href = CONFIG.TELEGRAM_LINK;
-      fallback.style.display = ''; // turant visible, koi 1.2s wait nahi
-      fallback.classList.add('show');
-    }
-  }
-
-  window.trackAndRedirect = function (event) {
-    if (event && typeof event.preventDefault === 'function') {
-      event.preventDefault();
-    }
-
-    if (fired) {
-      doRedirect();
-      return;
-    }
-    fired = true;
-
-    // Fallback turant ready + visible — safety net agar redirect fail ho
-    showFallback();
-
-    if (isProbablyBot()) {
-      doRedirect();
-      return;
-    }
-
-    const eventId = 'lead_' + Date.now() + '_' + Math.random().toString(36).slice(2, 8);
-    let pixelFired = false;
-
-    if (typeof fbq !== 'undefined') {
-      if (isLikelyRealUser()) {
-        fbq('track', 'Lead', {
-          content_name: 'Telegram Community',
-          button_click: true,
-        }, { eventID: eventId });
-      } else {
-        fbq('trackCustom', 'LowQualityClick', { eventID: eventId });
-      }
-      pixelFired = true;
-    }
-
-    // Safety net: agar page hide/unload ho raha hai jaldi (user ne
-    // app switch kiya ya browser navigate kar diya beforehand),
-    // ye listener ek aakhri chance deta hai. Real fbq calls already
-    // apna transport khud handle karte hain, ye sirf extra insurance hai.
-    if (pixelFired) {
-      const flushSafety = () => { /* no-op safety hook, kept for future CAPI beacon if needed */ };
-      document.addEventListener('visibilitychange', flushSafety, { once: true });
-      window.addEventListener('pagehide', flushSafety, { once: true });
-    }
-
-    // MAIN FIX: turant redirect NAHI, chhota sa flush window dete hain
-    // taaki Pixel ka network request cancel na ho. Itna kam hai (200ms)
-    // ki user ko lagega instant hi hua.
-    setTimeout(doRedirect, pixelFired ? CONFIG.PIXEL_FLUSH_DELAY_MS : 0);
-  };
-
-  /* ----------------------------------------------------------------
-     3) AUTO-WIRE ALL TELEGRAM BUTTONS — same as v1
-     ---------------------------------------------------------------- */
-  document.addEventListener('DOMContentLoaded', wireAllButtons);
-  if (document.readyState === 'interactive' || document.readyState === 'complete') {
-    wireAllButtons();
-  }
-
-  function wireAllButtons() {
-    const selectors = [
-      '[data-telegram-btn]',
-      '.telegram-btn',
-      '#telegramBtn',
-      '#stickyTelegramBtn',
-      '#fallbackLink',
-      '[id^="telegramBtn"]',
-    ];
-    const buttons = document.querySelectorAll(selectors.join(','));
-    buttons.forEach((el) => {
-      el.addEventListener('click', window.trackAndRedirect);
-    });
-
-    setupCountdown();
-  }
-
-  /* ----------------------------------------------------------------
-     4) COUNTDOWN (optional, auto-redirect without click) — same as v1
-     ---------------------------------------------------------------- */
-  function setupCountdown() {
-    if (!CONFIG.ENABLE_COUNTDOWN) return;
-
-    const counter =
-      document.getElementById('countdown') ||
-      document.getElementById('countTxt') ||
-      document.getElementById('count');
-
-    let time = CONFIG.COUNTDOWN_SECONDS;
-    if (counter) counter.textContent = time;
-
-    const timer = setInterval(() => {
-      time--;
-      if (counter) counter.textContent = time;
-
-      if (time <= 0) {
-        clearInterval(timer);
-        if (fired) return;
-
-        showFallback();
-        doRedirect();
-      }
-    }, 1000);
-  }
-})();
+}, 1000);
 </script>
 
 </body>
